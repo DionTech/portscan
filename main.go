@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/DionTech/portscan/pckg/flood"
+	"github.com/DionTech/portscan/pckg/ping"
 	"github.com/DionTech/portscan/pckg/scan"
 	"github.com/devfacet/gocmd"
 )
@@ -22,6 +23,11 @@ func main() {
 			Port    int    `short:"p" long:"port" description:"define the port to flood" required:"true" nonempty:"false"`
 			Size    int    `short:"s" long:"size" description:"define the size of how many connections to establish" required:"true" nonempty:"false"`
 		} `command:"flood" description:"make a port flooding; be careful what you do" nonempty:"false"`
+		Ping struct {
+			Message string `short:"m" long:"message" description:"define message to ping to server" required:"false" nonempty:"false"`
+			IP      string `short:"i" long:"ip" description:"define the ip to ping" required:"true" nonempty:"false"`
+			Port    int    `short:"p" long:"port" description:"define the port to ping" required:"true" nonempty:"false"`
+		} `command:"ping" description:"make a port flooding; be careful what you do" nonempty:"false"`
 	}{}
 
 	gocmd.HandleFlag("Flood", func(cmd *gocmd.Cmd, args []string) error {
@@ -35,12 +41,21 @@ func main() {
 		return nil
 	})
 
+	gocmd.HandleFlag("Ping", func(cmd *gocmd.Cmd, args []string) error {
+		message := "Ping \r\n\r\n"
+		if flags.Ping.Message != "" {
+			message = flags.Ping.Message
+		}
+		ping.Ping(flags.Ping.IP, flags.Ping.Port, message)
+		return nil
+	})
+
 	gocmd.HandleFlag("Scan", func(cmd *gocmd.Cmd, args []string) error {
 		//defining some efault values
 		start := 1
 		end := 65535
 		timeout := 500
-		threads := 500
+		threads := 20
 
 		if flags.Scan.Start != 0 {
 			start = flags.Scan.Start

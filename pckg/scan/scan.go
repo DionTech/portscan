@@ -56,6 +56,7 @@ func ScanPort(ip string, port int, timeout time.Duration, wg *sync.WaitGroup) {
 			time.Sleep(timeout)
 			ScanPort(ip, port, timeout, wg)
 		} else {
+			fmt.Printf("closed \t %d \t %s \n", port, knownPorts[port])
 			//fmt.Println(port, "closed")
 			wg.Done()
 		}
@@ -64,7 +65,7 @@ func ScanPort(ip string, port int, timeout time.Duration, wg *sync.WaitGroup) {
 
 	conn.Close()
 
-	fmt.Printf("%d \t %s \n", port, knownPorts[port])
+	fmt.Printf("open \t %d \t %s \n", port, knownPorts[port])
 	wg.Done()
 }
 
