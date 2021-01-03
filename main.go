@@ -18,10 +18,10 @@ func main() {
 			Threads int    `short:"t" long:"threads" description:"amount of threads being used" required:"false" nonempty:"false"`
 		} `command:"scan" description:"make a port scan" nonempty:"false"`
 		Flood struct {
-			LocalIP string `short:"l" long:"local-ip" description:"define the local ip address being used to flood" required:"false" nonempty:"false"`
-			IP      string `short:"i" long:"ip" description:"define the ip to flood" required:"true" nonempty:"false"`
-			Port    int    `short:"p" long:"port" description:"define the port to flood" required:"true" nonempty:"false"`
-			Size    int    `short:"s" long:"size" description:"define the size of how many connections to establish" required:"true" nonempty:"false"`
+			LocalIP     string `short:"l" long:"local-ip" description:"define the local ip address being used to flood" required:"false" nonempty:"false"`
+			IP          string `short:"i" long:"ip" description:"define the ip to flood" required:"true" nonempty:"false"`
+			Port        int    `short:"p" long:"port" description:"define the port to flood" required:"true" nonempty:"false"`
+			Connections int    `short:"c" long:"connections" description:"define the size of how many connections to establish" required:"true" nonempty:"false"`
 		} `command:"flood" description:"make a port flooding; be careful what you do" nonempty:"false"`
 		Ping struct {
 			Message string `short:"m" long:"message" description:"define message to ping to server" required:"false" nonempty:"false"`
@@ -36,7 +36,7 @@ func main() {
 			localIP = flags.Flood.LocalIP
 		}
 
-		flood.Do(localIP, flags.Flood.IP, flags.Flood.Port, flags.Flood.Size)
+		flood.Do(localIP, flags.Flood.IP, flags.Flood.Port, flags.Flood.Connections)
 
 		return nil
 	})
