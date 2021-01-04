@@ -9,8 +9,10 @@ import (
 
 func main() {
 	flags := struct {
-		Help bool `short:"h" long:"help" description:"Display usage" global:"false"`
-		Scan struct {
+		Help      bool `short:"h" long:"help" description:"Display usage" global:"false"`
+		Version   bool `short:"v" long:"version" description:"Display version"`
+		VersionEx bool `long:"vv" description:"Display version (extended)" nonempty:"true"`
+		Scan      struct {
 			IP      string `short:"i" long:"ip" description:"define the ip to scan" required:"true" nonempty:"false"`
 			Start   int    `short:"s" long:"start" description:"define the start port" required:"false" nonempty:"false"`
 			End     int    `short:"e" long:"end" description:"define the end port" required:"false" nonempty:"false"`

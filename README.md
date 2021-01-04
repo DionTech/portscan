@@ -8,6 +8,12 @@ go install
 
 After the binary was produced, you can make an alias for your terminal, if you want to - I made an alias called "portscan" and following examples will use this alias.
 
+## list commands
+
+```zsh
+portscan
+```
+
 ## scan an ip
 
 For example, use this to scan local IP, use 20 threads to scan and store the results in a file called portscan, so you can later grep the results.
