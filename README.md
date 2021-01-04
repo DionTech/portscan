@@ -22,6 +22,13 @@ For example, use this to scan local IP, use 20 threads to scan and store the res
 portscan scan -i 127.0.0.1 -t 20 > portscan
 ```
 
+Or only interested in open?
+
+```zsh
+portscan scan -i 127.0.0.1 -t 20 | grep ^open
+```
+
+
 ## flood an ip
 
 Following command will try to establish 400 TCP connections at 127.0.0.1:8002 and uses the local client IP 127.0.4.1 for binding to the socket.
